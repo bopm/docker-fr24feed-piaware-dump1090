@@ -42,8 +42,8 @@ COPY piaware.conf /etc/
 
 # FR24FEED
 WORKDIR /fr24feed
-RUN wget https://repo-feed.flightradar24.com/linux_x86_64_binaries/fr24feed_1.0.24-5_amd64.tgz \
-    && tar -xvzf *amd64.tgz
+RUN wget https://repo-feed.flightradar24.com/linux_x86_64_binaries/fr24feed_1.0.24-5_amd64.deb \
+    && dpkg -i fr24feed_1.0.24-5_amd64.deb
 COPY fr24feed.ini /etc/
 
 RUN apt-get update && apt-get install -y supervisor
