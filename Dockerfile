@@ -3,7 +3,7 @@ FROM debian:stretch
 MAINTAINER maugin.thomas@gmail.com
 
 RUN apt-get update && \
-    apt-get install -y wget devscripts libusb-1.0-0-dev pkg-config ca-certificates git-core cmake build-essential --no-install-recommends && \
+    apt-get install -y wget devscripts libusb-1.0-0-dev pkg-config ca-certificates git-core cmake build-essential systemd udev libcap2-bin --no-install-recommends && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -43,7 +43,7 @@ COPY piaware.conf /etc/
 # FR24FEED
 WORKDIR /fr24feed
 RUN wget https://repo-feed.flightradar24.com/linux_x86_64_binaries/fr24feed_1.0.24-5_amd64.deb \
-    && dpkg -i fr24feed_1.0.24-5_amd64.deb
+    && dpkg -i -a --force-confold fr24feed_1.0.24-5_amd64.deb
 COPY fr24feed.ini /etc/
 
 RUN apt-get update && apt-get install -y supervisor
